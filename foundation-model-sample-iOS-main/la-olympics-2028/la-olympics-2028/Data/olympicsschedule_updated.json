@@ -1,0 +1,212 @@
+[
+  {
+    "day": 1,
+    "date": "2025-09-24",
+    "events": [
+      {
+        "sport": "Athletics",
+        "event": "Men's 100m Heats",
+        "time": "10:00 am",
+        "venue": "Los Angeles Olympic Stadium"
+      },
+      {
+        "sport": "Swimming",
+        "event": "Women's 200m Freestyle Heats",
+        "time": "11:30 am",
+        "venue": "Los Angeles Aquatics Centre"
+      },
+      {
+        "sport": "Basketball",
+        "event": "Men's Preliminary Round: USA vs. FRA",
+        "time": "2:00 pm",
+        "venue": "Los Angeles Basketball Arena"
+      },
+      {
+        "sport": "Gymnastics",
+        "event": "Women's Team Qualification",
+        "time": "4:00 pm",
+        "venue": "Los Angeles Gymnastics Hall"
+      }
+    ]
+  },
+  {
+    "day": 2,
+    "date": "2025-09-25",
+    "events": [
+      {
+        "sport": "Cycling",
+        "event": "Men's Road Race Final",
+        "time": "9:00 am",
+        "venue": "Los Angeles City Circuit"
+      },
+      {
+        "sport": "Judo",
+        "event": "Women's 57kg Final",
+        "time": "12:00 pm",
+        "venue": "Los Angeles Judo Hall"
+      },
+      {
+        "sport": "Volleyball",
+        "event": "Women's Preliminary Round: BRA vs. JPN",
+        "time": "3:00 pm",
+        "venue": "Los Angeles Volleyball Arena"
+      },
+      {
+        "sport": "Fencing",
+        "event": "Men's Foil Individual Final",
+        "time": "6:00 pm",
+        "venue": "Los Angeles Fencing Centre"
+      }
+    ]
+  },
+  {
+    "day": 3,
+    "date": "2025-09-26",
+    "events": [
+      {
+        "sport": "Rowing",
+        "event": "Women's Single Sculls Final",
+        "time": "8:30 am",
+        "venue": "Los Angeles Rowing Lake"
+      },
+      {
+        "sport": "Tennis",
+        "event": "Men's Singles Quarterfinals",
+        "time": "11:00 am",
+        "venue": "Los Angeles Tennis Centre"
+      },
+      {
+        "sport": "Boxing",
+        "event": "Men's Lightweight Semifinals",
+        "time": "1:30 pm",
+        "venue": "Los Angeles Boxing Arena"
+      },
+      {
+        "sport": "Football",
+        "event": "Women's Group Stage: GER vs. AUS",
+        "time": "7:00 pm",
+        "venue": "Los Angeles Main Stadium"
+      }
+    ]
+  },
+  {
+    "day": 4,
+    "date": "2025-09-27",
+    "events": [
+      {
+        "sport": "Archery",
+        "event": "Men's Team Final",
+        "time": "9:00 am",
+        "venue": "Los Angeles Archery Field"
+      },
+      {
+        "sport": "Swimming",
+        "event": "Men's 100m Butterfly Final",
+        "time": "11:00 am",
+        "venue": "Los Angeles Aquatics Centre"
+      },
+      {
+        "sport": "Basketball",
+        "event": "Women's Preliminary Round: USA vs. CAN",
+        "time": "2:00 pm",
+        "venue": "Los Angeles Basketball Arena"
+      },
+      {
+        "sport": "Gymnastics",
+        "event": "Men's All-Around Final",
+        "time": "5:00 pm",
+        "venue": "Los Angeles Gymnastics Hall"
+      }
+    ]
+  },
+  {
+    "day": 5,
+    "date": "2025-09-28",
+    "events": [
+      {
+        "sport": "Athletics",
+        "event": "Women's 400m Final",
+        "time": "10:00 am",
+        "venue": "Los Angeles Olympic Stadium"
+      },
+      {
+        "sport": "Fencing",
+        "event": "Women's Sabre Team Final",
+        "time": "12:00 pm",
+        "venue": "Los Angeles Fencing Centre"
+      },
+      {
+        "sport": "Judo",
+        "event": "Men's 81kg Final",
+        "time": "3:00 pm",
+        "venue": "Los Angeles Judo Hall"
+      },
+      {
+        "sport": "Football",
+        "event": "Men's Group Stage: BRA vs. ESP",
+        "time": "7:30 pm",
+        "venue": "Los Angeles Main Stadium"
+      }
+    ]
+  },
+  {
+    "day": 6,
+    "date": "2025-09-29",
+    "events": [
+      {
+        "sport": "Cycling",
+        "event": "Women's Individual Time Trial",
+        "time": "8:00 am",
+        "venue": "Los Angeles City Circuit"
+      },
+      {
+        "sport": "Rowing",
+        "event": "Men's Eight Final",
+        "time": "10:30 am",
+        "venue": "Los Angeles Rowing Lake"
+      },
+      {
+        "sport": "Volleyball",
+        "event": "Men's Quarterfinals",
+        "time": "1:00 pm",
+        "venue": "Los Angeles Volleyball Arena"
+      },
+      {
+        "sport": "Tennis",
+        "event": "Women's Singles Semifinals",
+        "time": "4:00 pm",
+        "venue": "Los Angeles Tennis Centre"
+      }
+    ]
+  },
+  {
+    "day": 7,
+    "date": "2025-09-30",
+    "events": [
+      {
+        "sport": "Athletics",
+        "event": "Men's 200m Final",
+        "time": "9:30 am",
+        "venue": "Los Angeles Olympic Stadium"
+      },
+      {
+        "sport": "Swimming",
+        "event": "Women's 100m Backstroke Final",
+        "time": "11:00 am",
+        "venue": "Los Angeles Aquatics Centre"
+      },
+      {
+        "sport": "Basketball",
+        "event": "Men's Quarterfinals",
+        "time": "2:30 pm",
+        "venue": "Los Angeles Basketball Arena"
+      },
+      {
+        "sport": "Gymnastics",
+        "event": "Women's Floor Exercise Final",
+        "time": "6:00 pm",
+        "venue": "Los Angeles Gymnastics Hall"
+      }
+    ]
+  }
+]
