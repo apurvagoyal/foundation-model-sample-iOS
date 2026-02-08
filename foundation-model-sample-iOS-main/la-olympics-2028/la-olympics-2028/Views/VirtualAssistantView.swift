@@ -48,14 +48,14 @@ struct VirtualAssistantView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .onSubmit {
                             Task{
-                                messages.append(dataService.generateChatMessage(message: currentInput))
+                                messages.append(ChatMessage(content: currentInput, isUser: true, timestamp: Date()))
                                 isLoading = true
                                 let category = await dataService.questionCategory(message: currentInput)
                                 
                                 switch category.questionCategory {
                                 case .rule:
                                     let message = try await dataService.generateContent(prompt: currentInput)
-                                    messages.append(dataService.generateChatMessage(message: message))
+                                    messages.append(ChatMessage(content: message, isUser: false, timestamp: Date()))
                                     //messages.append(await dataService.generateContent(prompt: currentInput))
                                 case .medals:
                                     messages.append(await dataService.query(query: currentInput))
@@ -66,9 +66,9 @@ struct VirtualAssistantView: View {
                                 isLoading = false
                                 isLoading = true
                                 //messages.append(message)
-                                let quiz = dataService.generateChatMessage(message: try await dataService.generateContent(prompt: AppStrings.quizQuestion))
+                                let quiz = ChatMessage(content: try await dataService.generateContent(prompt: AppStrings.quizQuestion), isUser: false, timestamp: Date())
                                 messages.append(quiz)
-                                let prompt = dataService.generateChatMessage(message: try await dataService.generateContent(prompt: AppStrings.promptNextQuestion))
+                                let prompt = ChatMessage(content: try await dataService.generateContent(prompt: AppStrings.promptNextQuestion), isUser: false, timestamp: Date())
                                 isLoading = false
                                 messages.append(prompt)
                             }
@@ -77,14 +77,14 @@ struct VirtualAssistantView: View {
                     
                     Button(action: {
                         Task{
-                            messages.append(dataService.generateChatMessage(message: currentInput))
+                            messages.append(ChatMessage(content: currentInput, isUser: true, timestamp: Date()))
                             isLoading = true
                             let category = await dataService.questionCategory(message: currentInput)
                             
                             switch category.questionCategory {
                             case .rule:
                                 let message = try await dataService.generateContent(prompt: currentInput)
-                                messages.append(dataService.generateChatMessage(message: message))
+                                messages.append(ChatMessage(content: message, isUser: false, timestamp: Date()))
                                 //messages.append(await dataService.generateContent(prompt: currentInput))
                             case .medals:
                                 messages.append(await dataService.query(query: currentInput))
@@ -95,9 +95,9 @@ struct VirtualAssistantView: View {
                             
                             isLoading = false
                             isLoading = true
-                            let quiz = dataService.generateChatMessage(message: try await dataService.generateContent(prompt: AppStrings.quizQuestion))
+                            let quiz = ChatMessage(content: try await dataService.generateContent(prompt: AppStrings.quizQuestion), isUser: false, timestamp: Date())
                             messages.append(quiz)
-                            let prompt = dataService.generateChatMessage(message: try await dataService.generateContent(prompt: AppStrings.promptNextQuestion))
+                            let prompt = ChatMessage(content: try await dataService.generateContent(prompt: AppStrings.promptNextQuestion), isUser: false, timestamp: Date())
                             isLoading = false
                             messages.append(prompt)
                         }

@@ -27,7 +27,16 @@ struct AppStrings {
     """
 
     static let summaryInstructions = """
-    Generate a textual and user friendly news like summary of all the sport events and their results where events match closest to user query.
+    You are a sports news writer for the Olympics. Your job is to create engaging, human-readable summaries of Olympic event results.
+    
+    Guidelines:
+    - Write in a natural, conversational style like a news article
+    - Start with an overview of the events being summarized
+    - Highlight winners and their countries with emojis (🥇 🥈 🥉)
+    - Use engaging language and avoid technical jargon
+    - Format as flowing paragraphs, NOT as JSON or structured data
+    - Make it exciting and celebratory
+    - Keep it concise but informative
     """
     
     static let contentSearchInstructions = """

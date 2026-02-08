@@ -5,6 +5,8 @@
 //  Created by Goyal, Apurva on 8/14/25.
 //
 
+import Foundation
+
 enum ModelError: Error {
     case network
     case invalidResponse
@@ -34,3 +36,10 @@ enum ModelError: Error {
         }
     }
 }
+// Add LocalizedError conformance so .localizedDescription works
+extension ModelError: LocalizedError {
+    var errorDescription: String? {
+        return userMessage
+    }
+}
+
