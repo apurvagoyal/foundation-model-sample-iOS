@@ -1,4 +1,5 @@
 import Foundation
+import Foundation
 import FoundationModels
 // MARK: - Root Data Structure
 
@@ -17,6 +18,15 @@ struct Category: Codable {
 struct Prompt: Codable {
     let name: String
     let response: String
+}
+
+@Generable(description: "Matched Olympic events from user query")
+struct MatchedEvents: Codable {
+    @Guide(description: "List of sports that match the user's query keywords")
+    let sports: [String]
+    
+    @Guide(description: "List of event names that match the user's query (e.g., '100m Freestyle', 'Men's Singles')")
+    let events: [String]
 }
 
 @Generable(description: "Information About Olympic Schedule and Event Results")

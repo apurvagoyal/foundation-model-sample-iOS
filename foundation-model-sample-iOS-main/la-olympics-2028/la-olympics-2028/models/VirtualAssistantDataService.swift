@@ -23,11 +23,17 @@ class VirtualAssistantDataService {
     /// Language model for general-purpose text generation
     private let generalModel = SystemLanguageModel(useCase: .general)
     
+    /// Language model for sport and event matching
+    private let matchingModel = SystemLanguageModel(useCase: .general)
+    
     /// Session for content tagging operations
     private var contentTaggingSession: LanguageModelSession?
     
     /// Session for general text generation operations
     private var generalSession: LanguageModelSession?
+    
+    /// Session for sport/event matching operations
+    private var matchingSession: LanguageModelSession?
     
     // MARK: - Computed Properties
     
@@ -39,6 +45,11 @@ class VirtualAssistantDataService {
     /// Indicates whether the general model is available
     var isGeneralModelAvailable: Bool {
         generalModel.availability == .available
+    }
+    
+    /// Indicates whether the matching model is available
+    var isMatchingModelAvailable: Bool {
+        matchingModel.availability == .available
     }
     
     // MARK: - Initialization
@@ -173,6 +184,88 @@ class VirtualAssistantDataService {
         }
     }
     
+    /// Matches user query keywords to actual event names in the dataset
+    /// - Parameters:
+    ///   - keywords: Keywords extracted from user query
+    ///   - availableData: Sample of available sports and events from the dataset
+    /// - Returns: Matched sports and event names
+    /// - Throws: ModelError if matching fails
+    private func matchEventsUsingAI(keywords: [String], availableData: String) async throws -> MatchedEvents {
+        guard isMatchingModelAvailable else {
+            throw ModelError.notInitialized
+        }
+        
+        // Create a new matching session with specialized instructions
+        matchingSession = LanguageModelSession(
+            instructions: AppStrings.eventMatchingInstructions
+        )
+        
+        let prompt = """
+        User query keywords: \(keywords.joined(separator: ", "))
+        
+        Available Olympic sports and events in the dataset:
+        \(availableData)
+        
+        Task: Match the user's query to relevant events from the available data.
+        
+        Matching rules:
+        - If query is SPECIFIC (e.g., "100m", "singles", "relay"), return ONLY that specific event
+        - If query is BROAD (e.g., just "badminton", "swimming"), return ALL related events
+        - "100 meter" or "100m" → match ONLY "100m" events (NOT 100m Relay, NOT 200m)
+        - "badminton" alone → return ["Singles", "Doubles", "Mixed Doubles"]
+        - "swimming" alone → return ALL swimming events
+        - "freestyle" → match ALL freestyle distances
+        
+        Specificity guidelines:
+        - Fewer keywords (1-2) = broad match → return multiple events
+        - More keywords (3+) or very specific terms = narrow match → return 1 specific event
+        
+        Return:
+        - sports: The sport name (e.g., "Badminton")
+        - events: Event names as they appear in data
+          * Broad query: ["Singles", "Doubles", "Mixed Doubles"]
+          * Specific query: ["100m"]
+        """
+        
+        do {
+            let response = try await matchingSession!.respond(
+                to: prompt,
+                generating: MatchedEvents.self
+            )
+            return response.content
+            
+        } catch {
+            print("Event matching error: \(error.localizedDescription)")
+            throw ModelError.unknown
+        }
+    }
+    
+    /// Generates a summary of available sports and events from the dataset
+    /// - Parameter results: Olympic results data
+    /// - Returns: Formatted string listing unique sports and their events
+    private func generateAvailableEventsDescription(from results: [OlympicResult]) -> String {
+        var sportEventsMap: [String: Set<String>] = [:]
+        
+        // Group events by sport
+        for result in results {
+            if sportEventsMap[result.sport] == nil {
+                sportEventsMap[result.sport] = Set<String>()
+            }
+            sportEventsMap[result.sport]?.insert(result.event)
+        }
+        
+        // Format as readable text
+        var description = ""
+        for (sport, events) in sportEventsMap.sorted(by: { $0.key < $1.key }) {
+            description += "\n\(sport):\n"
+            for event in events.sorted() {
+                description += "  - \(event)\n"
+            }
+        }
+        
+        return description
+    }
+    
     // MARK: - Private Helper Methods - Data Processing
     
     /// Processes an Olympic-related query by searching and filtering results
@@ -186,7 +279,58 @@ class VirtualAssistantDataService {
             return AppStrings.assistantCannotFindFile
         }
         
-        // Filter results by keywords
+        // Try AI-enhanced matching first for better results
+        do {
+            // Generate description of available data
+            let availableData = generateAvailableEventsDescription(from: results)
+            
+            // Use AI to match keywords to actual event names
+            let matchedEvents = try await matchEventsUsingAI(
+                keywords: keywords,
+                availableData: availableData
+            )
+            
+            print("🤖 AI Matched - Sports: \(matchedEvents.sports), Events: \(matchedEvents.events)")
+            
+            // Use AI-matched keywords for more precise filtering
+            var aiFilteredResults: [OlympicResult] = []
+            
+            // First, filter by sport if matched
+            if !matchedEvents.sports.isEmpty {
+                aiFilteredResults = results.filter { result in
+                    matchedEvents.sports.contains { sport in
+                        result.sport.lowercased() == sport.lowercased()
+                    }
+                }
+            } else {
+                aiFilteredResults = results
+            }
+            
+            // Then, filter by event if matched
+            if !matchedEvents.events.isEmpty {
+                aiFilteredResults = aiFilteredResults.filter { result in
+                    let resultEvent = result.event.lowercased()
+                    return matchedEvents.events.contains { event in
+                        resultEvent.contains(event.lowercased()) || event.lowercased().contains(resultEvent)
+                    }
+                }
+            }
+            
+            print("🔍 AI Filtered Results: \(aiFilteredResults.count) matches")
+            
+            if !aiFilteredResults.isEmpty {
+                // Apply gender filter if provided
+                let genderFilteredResults = applyGenderFilter(to: aiFilteredResults, gender: gender)
+                
+                if !genderFilteredResults.isEmpty {
+                    return await generateResponse(for: genderFilteredResults)
+                }
+            }
+        } catch {
+            print("AI matching failed, falling back to simple matching: \(error.localizedDescription)")
+        }
+        
+        // Fallback: Use simple keyword matching
         let keywordsLowercased = keywords.map { $0.lowercased() }
         let filteredResults = filterResultsByKeywords(results, keywords: keywordsLowercased)
         

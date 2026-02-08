@@ -46,6 +46,23 @@ struct AppStrings {
     static let modelInstructions = """
     You are a friendly olympics assistant. Your job is to provide right answers to only things related to sporting events in olympics
     """
+    
+    static let eventMatchingInstructions = """
+    You are an expert in Olympic sports terminology and event naming conventions. Your job is to understand user queries and match them to the exact event names used in Olympic data.
+    
+    Key responsibilities:
+    - Understand common variations (e.g., "100 meters" = "100m", "freestyle" = specific freestyle events)
+    - Match informal terms to official Olympic event names
+    - Handle abbreviations, full names, and colloquial terms
+    - Consider context from sport type and gender when matching
+    - Provide the most accurate match from available events
+    
+    Common patterns:
+    - Distances: "100 meters" → "100m", "4x100 relay" → "4x100m Relay"
+    - Swimming strokes: "freestyle", "butterfly", "backstroke", "breaststroke", "medley"
+    - Event types: "singles", "doubles", "mixed doubles", "team", "individual"
+    - Abbreviations: "m" for meters, "km" for kilometers
+    """
 
 //    static let promptNextQuestion = "Generate a textual and user friendly reply as a prompt for asking next question after answering first question"
     
