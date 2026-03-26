@@ -1,0 +1,306 @@
+{
+  "sections": [
+    {
+      "section": "1 THE PLAYERS",
+      "clauses": [
+        {
+          "id": "1.1",
+          "title": "Number of players",
+          "content": "A match is played between two sides, each of eleven players, one of whom shall be captain."
+        },
+        {
+          "id": "1.2",
+          "title": "Nomination and replacement of players",
+          "subclauses": [
+            {
+              "id": "1.2.1",
+              "content": "Each captain shall nominate 11 players plus up to 4 substitute fielders before the toss. No changes without consent."
+            },
+            {
+              "id": "1.2.2",
+              "content": "Only nominated substitutes may act unless exceptional approval is granted."
+            },
+            {
+              "id": "1.2.3",
+              "content": "All nominated players must be eligible and confirm eligibility."
+            },
+            {
+              "id": "1.2.4",
+              "content": "Players agree to ICC regulations including Code of Conduct, Anti-Doping, Anti-Corruption, etc."
+            },
+            {
+              "id": "1.2.5",
+              "content": "Suspended players cannot participate or enter playing area."
+            },
+            {
+              "id": "1.2.6",
+              "content": "Suspended players may remain in dressing room if outside playing area."
+            },
+            {
+              "id": "1.2.7",
+              "title": "Concussion Replacement",
+              "subclauses": [
+                {
+                  "id": "1.2.7.1",
+                  "content": "Replacement allowed if concussion occurs during play and is medically confirmed."
+                },
+                {
+                  "id": "1.2.7.3",
+                  "content": "Match referee approves like-for-like replacement."
+                },
+                {
+                  "id": "1.2.7.5",
+                  "content": "Conditions may be imposed to avoid unfair advantage."
+                },
+                {
+                  "id": "1.2.7.7",
+                  "content": "Decision is final with no appeal."
+                },
+                {
+                  "id": "1.2.7.8",
+                  "content": "Replaced player takes no further part."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "1.3",
+          "title": "Captain",
+          "content": "Deputy acts if captain unavailable; only nominated players can act post-nomination."
+        },
+        {
+          "id": "1.4",
+          "title": "Responsibility of captains",
+          "content": "Captains ensure play follows Spirit of Cricket and rules."
+        }
+      ]
+    },
+    {
+      "section": "2 THE UMPIRES",
+      "clauses": [
+        {
+          "id": "2.1",
+          "title": "Appointment and attendance",
+          "content": "Umpires must be impartial and present at least 2 hours before play."
+        },
+        {
+          "id": "2.1.2",
+          "content": "Officials include match referee, two on-field umpires, third umpire, and fourth umpire."
+        },
+        {
+          "id": "2.2",
+          "content": "Umpires cannot be changed except in exceptional cases."
+        },
+        {
+          "id": "2.3",
+          "title": "Consultation with Home Board",
+          "content": "Decide balls, timings, boundaries, covers, and conditions."
+        },
+        {
+          "id": "2.6",
+          "content": "Umpires judge fair and unfair play."
+        },
+        {
+          "id": "2.7",
+          "title": "Fitness for play",
+          "content": "Umpires decide if conditions are safe and reasonable."
+        },
+        {
+          "id": "2.8",
+          "title": "Suspension of play",
+          "content": "Play is suspended if conditions are dangerous or unreasonable."
+        },
+        {
+          "id": "2.12",
+          "title": "Umpire’s decision",
+          "content": "Decisions are final unless promptly corrected."
+        }
+      ]
+    },
+    {
+      "section": "3 THE SCORERS",
+      "clauses": [
+        {
+          "id": "3.1",
+          "content": "Two scorers record runs, wickets, overs."
+        },
+        {
+          "id": "3.2",
+          "content": "Scorers must ensure agreement and consult umpires."
+        }
+      ]
+    },
+    {
+      "section": "4 THE BALL",
+      "clauses": [
+        {
+          "id": "4.1",
+          "content": "Ball weight: 155.9g–163g; circumference: 22.4–22.9 cm."
+        },
+        {
+          "id": "4.2",
+          "content": "Home board supplies approved balls."
+        },
+        {
+          "id": "4.3",
+          "content": "New ball at start of each innings."
+        },
+        {
+          "id": "4.4",
+          "content": "Ball replaced if lost or unfit."
+        }
+      ]
+    },
+    {
+      "section": "5 THE BAT",
+      "clauses": [
+        {
+          "id": "5.1",
+          "content": "Bat consists of handle and blade."
+        },
+        {
+          "id": "5.3",
+          "content": "Blade must be wood."
+        },
+        {
+          "id": "5.5",
+          "content": "Bat must not damage the ball."
+        },
+        {
+          "id": "5.7",
+          "title": "Bat size limits",
+          "content": "Max length 96.52 cm; width 10.8 cm; depth 6.7 cm."
+        }
+      ]
+    },
+    {
+      "section": "6 THE PITCH",
+      "clauses": [
+        {
+          "id": "6.1",
+          "content": "Pitch length 22 yards, width 10 ft."
+        },
+        {
+          "id": "6.2",
+          "content": "Umpires judge pitch fitness."
+        },
+        {
+          "id": "6.3",
+          "content": "Ground authority prepares pitch; umpires control use."
+        },
+        {
+          "id": "6.4",
+          "title": "Changing the pitch",
+          "content": "If unsafe, play stops and may be abandoned or restarted."
+        }
+      ]
+    },
+    {
+      "section": "7 THE CREASES",
+      "clauses": [
+        {
+          "id": "7.2",
+          "content": "Bowling crease marks end of pitch."
+        },
+        {
+          "id": "7.3",
+          "content": "Popping crease 4 ft in front of bowling crease."
+        },
+        {
+          "id": "7.4",
+          "content": "Return creases at right angles."
+        }
+      ]
+    },
+    {
+      "section": "8 THE WICKETS",
+      "clauses": [
+        {
+          "id": "8.1",
+          "content": "Three stumps and two bails; width 22.86 cm."
+        },
+        {
+          "id": "8.2",
+          "content": "Stump height 71.12 cm."
+        },
+        {
+          "id": "8.3",
+          "content": "Bail dimensions defined."
+        }
+      ]
+    },
+    {
+      "section": "9 PREPARATION AND MAINTENANCE OF THE PLAYING AREA",
+      "clauses": [
+        {
+          "id": "9.1",
+          "content": "Rolling allowed before second innings or delayed start."
+        },
+        {
+          "id": "9.2",
+          "content": "Pitch cleared of debris between innings."
+        },
+        {
+          "id": "9.4",
+          "content": "Pitch not watered during match."
+        }
+      ]
+    },
+    {
+      "section": "10 COVERING THE PITCH",
+      "clauses": [
+        {
+          "id": "10.1",
+          "content": "Pitch protected before match."
+        },
+        {
+          "id": "10.2",
+          "content": "Covers must protect pitch and surroundings."
+        },
+        {
+          "id": "10.3",
+          "content": "Covers removed before play unless raining."
+        }
+      ]
+    },
+    {
+      "section": "11 INTERVALS",
+      "clauses": [
+        {
+          "id": "11.1",
+          "content": "Intervals include innings break and drinks."
+        },
+        {
+          "id": "11.2",
+          "content": "20-minute interval between innings."
+        },
+        {
+          "id": "11.5",
+          "content": "Optional drinks break mid-innings."
+        }
+      ]
+    },
+    {
+      "section": "12 START OF PLAY; CESSATION OF PLAY",
+      "clauses": [
+        {
+          "id": "12.1",
+          "content": "Call of Play starts match or resumes play."
+        },
+        {
+          "id": "12.2",
+          "content": "Call of Time ends session."
+        },
+        {
+          "id": "12.6",
+          "content": "Match ends when result achieved or play cannot continue."
+        },
+        {
+          "id": "12.8",
+          "content": "Minimum over rate: 14.11 overs per hour."
+        }
+      ]
+    }
+  ]
+}

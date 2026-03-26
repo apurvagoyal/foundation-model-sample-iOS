@@ -1,0 +1,252 @@
+[
+  {
+    "id": "athlete_kaylee_mckeown_aus",
+    "name": {
+      "full": "Kaylee Rochelle McKeown",
+      "display": "Kaylee McKeown"
+    },
+    "country": {
+      "code": "AUS",
+      "name": "Australia"
+    },
+    "sports": [
+      {
+        "name": "Aquatics",
+        "discipline": "Swimming",
+        "events": [
+          "100m Backstroke",
+          "200m Backstroke",
+          "200m Individual Medley",
+          "4x100m Medley Relay",
+          "4x100m Mixed Medley Relay"
+        ]
+      }
+    ],
+    "olympicAppearances": [
+      {
+        "year": 2020,
+        "host": "Tokyo",
+        "season": "Summer",
+        "medals": {
+          "gold": 3,
+          "silver": 0,
+          "bronze": 1,
+          "detail": [
+            { "event": "100m Backstroke", "medal": "Gold" },
+            { "event": "200m Backstroke", "medal": "Gold" },
+            { "event": "4x100m Medley Relay", "medal": "Gold" },
+            { "event": "4x100m Mixed Medley Relay", "medal": "Bronze" }
+          ]
+        }
+      },
+      {
+        "year": 2024,
+        "host": "Paris",
+        "season": "Summer",
+        "medals": {
+          "gold": 2,
+          "silver": 1,
+          "bronze": 2,
+          "detail": [
+            { "event": "100m Backstroke", "medal": "Gold" },
+            { "event": "200m Backstroke", "medal": "Gold" },
+            { "event": "4x100m Medley Relay (Women)", "medal": "Silver" },
+            { "event": "200m Individual Medley", "medal": "Bronze" },
+            { "event": "4x100m Mixed Medley Relay", "medal": "Bronze" }
+          ]
+        }
+      }
+    ],
+    "medalTotals": {
+      "gold": 5,
+      "silver": 1,
+      "bronze": 3,
+      "total": 9
+    },
+    "biography": {
+      "summary": "Kaylee McKeown is an Australian swimmer and quintuple Olympic gold medalist, born on 12 July 2001 in Queensland. She is the first woman in history to successfully defend both the 100m and 200m Olympic backstroke titles and the first Australian to win four individual Olympic gold medals. She holds world records in the 50m, 100m, and 200m backstroke.",
+      "dateOfBirth": "2001-07-12",
+      "placeOfBirth": "Queensland, Australia",
+      "height": 174,
+      "active": true
+    }
+  },
+  {
+    "id": "athlete_emma_mckeon_aus",
+    "name": {
+      "full": "Emma Jennifer McKeon",
+      "display": "Emma McKeon"
+    },
+    "country": {
+      "code": "AUS",
+      "name": "Australia"
+    },
+    "sports": [
+      {
+        "name": "Aquatics",
+        "discipline": "Swimming",
+        "events": [
+          "50m Freestyle",
+          "100m Freestyle",
+          "200m Freestyle",
+          "100m Butterfly",
+          "4x100m Freestyle Relay",
+          "4x200m Freestyle Relay",
+          "4x100m Medley Relay",
+          "4x100m Mixed Medley Relay"
+        ]
+      }
+    ],
+    "olympicAppearances": [
+      {
+        "year": 2016,
+        "host": "Rio de Janeiro",
+        "season": "Summer",
+        "medals": {
+          "gold": 1,
+          "silver": 2,
+          "bronze": 1,
+          "detail": [
+            { "event": "4x100m Freestyle Relay", "medal": "Gold" },
+            { "event": "4x200m Freestyle Relay", "medal": "Silver" },
+            { "event": "4x100m Medley Relay", "medal": "Silver" },
+            { "event": "200m Freestyle", "medal": "Bronze" }
+          ]
+        }
+      },
+      {
+        "year": 2020,
+        "host": "Tokyo",
+        "season": "Summer",
+        "medals": {
+          "gold": 4,
+          "silver": 0,
+          "bronze": 3,
+          "detail": [
+            { "event": "50m Freestyle", "medal": "Gold" },
+            { "event": "100m Freestyle", "medal": "Gold" },
+            { "event": "4x100m Freestyle Relay", "medal": "Gold" },
+            { "event": "4x100m Medley Relay", "medal": "Gold" },
+            { "event": "100m Butterfly", "medal": "Bronze" },
+            { "event": "4x200m Freestyle Relay", "medal": "Bronze" },
+            { "event": "4x100m Mixed Medley Relay", "medal": "Bronze" }
+          ]
+        }
+      },
+      {
+        "year": 2024,
+        "host": "Paris",
+        "season": "Summer",
+        "medals": {
+          "gold": 1,
+          "silver": 1,
+          "bronze": 1,
+          "detail": [
+            { "event": "4x100m Freestyle Relay", "medal": "Gold" },
+            { "event": "4x100m Medley Relay (Women)", "medal": "Silver" },
+            { "event": "4x100m Mixed Medley Relay", "medal": "Bronze" }
+          ]
+        }
+      }
+    ],
+    "medalTotals": {
+      "gold": 6,
+      "silver": 3,
+      "bronze": 5,
+      "total": 14
+    },
+    "biography": {
+      "summary": "Emma McKeon is a retired Australian swimmer born on 24 May 1994 in Wollongong, New South Wales. She is Australia's most decorated Olympian of all time with 14 Olympic medals including 6 gold. At Tokyo 2020 she won 7 medals — the most by any female swimmer at a single Olympic Games. She retired after the 2024 Paris Olympics.",
+      "dateOfBirth": "1994-05-24",
+      "placeOfBirth": "Wollongong, New South Wales, Australia",
+      "height": 179,
+      "active": false
+    }
+  },
+  {
+    "id": "athlete_caeleb_dressel_usa",
+    "name": {
+      "full": "Caeleb Remel Dressel",
+      "display": "Caeleb Dressel"
+    },
+    "country": {
+      "code": "USA",
+      "name": "United States of America"
+    },
+    "sports": [
+      {
+        "name": "Aquatics",
+        "discipline": "Swimming",
+        "events": [
+          "50m Freestyle",
+          "100m Freestyle",
+          "100m Butterfly",
+          "4x100m Freestyle Relay",
+          "4x100m Medley Relay",
+          "4x100m Mixed Medley Relay"
+        ]
+      }
+    ],
+    "olympicAppearances": [
+      {
+        "year": 2016,
+        "host": "Rio de Janeiro",
+        "season": "Summer",
+        "medals": {
+          "gold": 2,
+          "silver": 0,
+          "bronze": 0,
+          "detail": [
+            { "event": "4x100m Freestyle Relay", "medal": "Gold" },
+            { "event": "4x100m Medley Relay", "medal": "Gold" }
+          ]
+        }
+      },
+      {
+        "year": 2020,
+        "host": "Tokyo",
+        "season": "Summer",
+        "medals": {
+          "gold": 5,
+          "silver": 0,
+          "bronze": 0,
+          "detail": [
+            { "event": "50m Freestyle", "medal": "Gold" },
+            { "event": "100m Freestyle", "medal": "Gold" },
+            { "event": "100m Butterfly", "medal": "Gold" },
+            { "event": "4x100m Freestyle Relay", "medal": "Gold" },
+            { "event": "4x100m Medley Relay", "medal": "Gold" }
+          ]
+        }
+      },
+      {
+        "year": 2024,
+        "host": "Paris",
+        "season": "Summer",
+        "medals": {
+          "gold": 2,
+          "silver": 1,
+          "bronze": 0,
+          "detail": [
+            { "event": "4x100m Freestyle Relay", "medal": "Gold" },
+            { "event": "4x100m Mixed Medley Relay", "medal": "Gold" },
+            { "event": "4x100m Medley Relay", "medal": "Silver" }
+          ]
+        }
+      }
+    ],
+    "medalTotals": {
+      "gold": 9,
+      "silver": 1,
+      "bronze": 0,
+      "total": 10
+    },
+    "biography": {
+      "summary": "Caeleb Dressel is an American sprint swimmer born on 16 August 1996 in Green Cove Springs, Florida. A nine-time Olympic gold medalist, he won five golds at Tokyo 2020 — the fifth American ever to achieve that feat at a single Games. He holds world records in the 100m butterfly (long course) and is renowned as one of the most explosive sprint swimmers in history.",
+      "dateOfBirth": "1996-08-16",
+      "placeOfBirth": "Green Cove Springs, Florida, USA",
+      "height": 191,
+      "active": true
+    }
+  }
+]

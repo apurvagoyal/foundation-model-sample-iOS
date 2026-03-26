@@ -1,0 +1,99 @@
+{
+  "uuid": "3bf69221-d04a-412f-ad52-761a358acec0",
+  "lastMigration": 33,
+  "name": "Untitled",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "1a3b6639-3cf7-4ecf-8da7-e612812c07a9",
+      "type": "http",
+      "documentation": "Gets all the athletes for a given sports in 2020 Olympics",
+      "method": "get",
+      "endpoint": "athletes/swimming",
+      "responses": [
+        {
+          "uuid": "469fcd0a-3083-4fa4-a1ca-5617d584b0bb",
+          "body": "[\n  {\n    \"id\": \"athlete_kaylee_mckeown_aus\",\n    \"name\": {\n      \"full\": \"Kaylee Rochelle McKeown\",\n      \"display\": \"Kaylee McKeown\"\n    },\n    \"country\": {\n      \"code\": \"AUS\",\n      \"name\": \"Australia\"\n    },\n    \"sports\": [\n      {\n        \"name\": \"Aquatics\",\n        \"discipline\": \"Swimming\",\n        \"events\": [\n          \"100m Backstroke\",\n          \"200m Backstroke\",\n          \"200m Individual Medley\",\n          \"4x100m Medley Relay\",\n          \"4x100m Mixed Medley Relay\"\n        ]\n      }\n    ],\n    \"medals\": {\n      \"gold\": 2,\n      \"silver\": 1,\n      \"bronze\": 2,\n      \"total\": 5,\n      \"detail\": [\n        { \"event\": \"100m Backstroke\", \"medal\": \"Gold\" },\n        { \"event\": \"200m Backstroke\", \"medal\": \"Gold\" },\n        { \"event\": \"4x100m Medley Relay (Women)\", \"medal\": \"Silver\" },\n        { \"event\": \"200m Individual Medley\", \"medal\": \"Bronze\" },\n        { \"event\": \"4x100m Mixed Medley Relay\", \"medal\": \"Bronze\" }\n      ]\n    },\n    \"biography\": {\n      \"summary\": \"Kaylee McKeown is an Australian swimmer and quintuple Olympic gold medalist, born on 12 July 2001 in Queensland. She is the first woman in history to successfully defend both the 100m and 200m Olympic backstroke titles and the first Australian to win four individual Olympic gold medals. She holds world records in the 50m, 100m, and 200m backstroke.\",\n      \"dateOfBirth\": \"2001-07-12\",\n      \"placeOfBirth\": \"Queensland, Australia\",\n      \"height\": 174,\n      \"active\": true\n    }\n  },\n  {\n    \"id\": \"athlete_emma_mckeon_aus\",\n    \"name\": {\n      \"full\": \"Emma Jennifer McKeon\",\n      \"display\": \"Emma McKeon\"\n    },\n    \"country\": {\n      \"code\": \"AUS\",\n      \"name\": \"Australia\"\n    },\n    \"sports\": [\n      {\n        \"name\": \"Aquatics\",\n        \"discipline\": \"Swimming\",\n        \"events\": [\n          \"50m Freestyle\",\n          \"100m Freestyle\",\n          \"200m Freestyle\",\n          \"100m Butterfly\",\n          \"4x100m Freestyle Relay\",\n          \"4x200m Freestyle Relay\",\n          \"4x100m Medley Relay\",\n          \"4x100m Mixed Medley Relay\"\n        ]\n      }\n    ],\n    \"medals\": {\n      \"gold\": 1,\n      \"silver\": 1,\n      \"bronze\": 1,\n      \"total\": 3,\n      \"detail\": [\n        { \"event\": \"4x100m Freestyle Relay\", \"medal\": \"Gold\" },\n        { \"event\": \"4x100m Medley Relay (Women)\", \"medal\": \"Silver\" },\n        { \"event\": \"4x100m Mixed Medley Relay\", \"medal\": \"Bronze\" }\n      ]\n    },\n    \"biography\": {\n      \"summary\": \"Emma McKeon is a retired Australian swimmer born on 24 May 1994 in Wollongong, New South Wales. She is Australia's most decorated Olympian of all time with 14 career Olympic medals including 6 gold. Paris 2024 was her farewell Games, where she added a relay gold, silver, and bronze before retiring from competitive swimming.\",\n      \"dateOfBirth\": \"1994-05-24\",\n      \"placeOfBirth\": \"Wollongong, New South Wales, Australia\",\n      \"height\": 179,\n      \"active\": false\n    }\n  },\n  {\n    \"id\": \"athlete_caeleb_dressel_usa\",\n    \"name\": {\n      \"full\": \"Caeleb Remel Dressel\",\n      \"display\": \"Caeleb Dressel\"\n    },\n    \"country\": {\n      \"code\": \"USA\",\n      \"name\": \"United States of America\"\n    },\n    \"sports\": [\n      {\n        \"name\": \"Aquatics\",\n        \"discipline\": \"Swimming\",\n        \"events\": [\n          \"50m Freestyle\",\n          \"100m Freestyle\",\n          \"100m Butterfly\",\n          \"4x100m Freestyle Relay\",\n          \"4x100m Medley Relay\",\n          \"4x100m Mixed Medley Relay\"\n        ]\n      }\n    ],\n    \"medals\": {\n      \"gold\": 2,\n      \"silver\": 1,\n      \"bronze\": 0,\n      \"total\": 3,\n      \"detail\": [\n        { \"event\": \"4x100m Freestyle Relay\", \"medal\": \"Gold\" },\n        { \"event\": \"4x100m Mixed Medley Relay\", \"medal\": \"Gold\" },\n        { \"event\": \"4x100m Medley Relay\", \"medal\": \"Silver\" }\n      ]\n    },\n    \"biography\": {\n      \"summary\": \"Caeleb Dressel is an American sprint swimmer born on 16 August 1996 in Green Cove Springs, Florida. A nine-time Olympic gold medalist across three Games, he is renowned as one of the most explosive sprint swimmers in history. He holds the world record in the 100m butterfly (long course) and was the first swimmer to win gold in the 50m freestyle, 100m freestyle, and 100m butterfly at the same Olympics.\",\n      \"dateOfBirth\": \"1996-08-16\",\n      \"placeOfBirth\": \"Green Cove Springs, Florida, USA\",\n      \"height\": 191,\n      \"active\": true\n    }\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "1a3b6639-3cf7-4ecf-8da7-e612812c07a9"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

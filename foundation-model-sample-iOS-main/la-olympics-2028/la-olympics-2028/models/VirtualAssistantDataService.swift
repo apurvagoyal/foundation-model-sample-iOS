@@ -35,6 +35,15 @@ class VirtualAssistantDataService {
     /// Session for sport/event matching operations
     private var matchingSession: LanguageModelSession?
     
+    /// Session for athlete comparison with tool calling
+    private var athleteSession: LanguageModelSession?
+    
+    /// Athlete medal tool for querying athlete data
+    private let athleteTool: AthleteMedalTool
+    
+    /// Data service for athlete medal information
+    private let athleteDataService: AthleteMedalDataService
+    
     // MARK: - Computed Properties
     
     /// Indicates whether the content tagging model is available
@@ -53,6 +62,12 @@ class VirtualAssistantDataService {
     }
     
     // MARK: - Initialization
+    
+    init() {
+        // Initialize athlete data service and tool
+        self.athleteDataService = AthleteMedalDataService()
+        self.athleteTool = AthleteMedalTool(dataService: athleteDataService)
+    }
     
     /// Initializes the assistant and returns the welcome message
     func getInitialMessage() -> ChatMessage {
@@ -94,6 +109,14 @@ class VirtualAssistantDataService {
             // Extract content tags from the query
             let queryTags = try await extractContentTags(from: query)
             
+            // Check if this is an athlete comparison query
+            if queryTags.isAthleteComparison {
+                print("🏊 Detected athlete comparison query")
+                let response = await processAthleteComparisonQuery(query: query, keywords: queryTags.topics)
+                return createChatMessage(content: response)
+            }
+            
+            // Otherwise, proceed with regular Olympic event query processing
             guard !queryTags.topics.isEmpty else {
                 return createChatMessage(content: AppStrings.assistantSomethingWrong)
             }
@@ -157,6 +180,75 @@ class VirtualAssistantDataService {
         } catch {
             print("Content generation error: \(error.localizedDescription)")
             return AppStrings.assistantGenericError
+        }
+    }
+    
+    // MARK: - Private Helper Methods - Athlete Comparison
+    
+    /// Processes an athlete comparison query using the athlete medal tool
+    /// - Parameters:
+    ///   - query: The original user query
+    ///   - keywords: Extracted keywords that may contain athlete names
+    /// - Returns: Formatted response from the Foundation Model with tool calling
+    private func processAthleteComparisonQuery(query: String, keywords: [String]) async -> String {
+        // Initialize athlete session if needed
+        if athleteSession == nil {
+            guard isGeneralModelAvailable else {
+                return AppStrings.assistantUnavailable
+            }
+            
+            // Create session with tool and instructions
+            athleteSession = LanguageModelSession(
+                tools: [athleteTool],
+                instructions: """
+                You are an expert Olympic swimming statistician and analyst.
+                
+                You have access to the 'getAthleteMedals' tool that retrieves Olympic medal data for swimmers.
+                
+                When users ask about athlete comparisons or who is the best:
+                1. Use the tool to retrieve medal data for the athletes mentioned
+                2. Analyze the data yourself considering:
+                   - Total medal count
+                   - Gold medal count
+                   - Silver medal count
+                   - Context like specialization and Olympic Games attended
+                3. Provide nuanced, intelligent analysis
+                4. Acknowledge different strengths - more medals doesn't always mean "better"
+                5. Be enthusiastic and engaging
+                
+                Available athletes:
+                - Kaylee McKeown (AUS) - Backstroke specialist
+                - Emma McKeon (AUS) - Freestyle and relay champion
+                - Caeleb Dressel (USA) - Sprint specialist
+                
+                If asked about athletes not in the database, politely explain you only have data for these three champions.
+                """
+            )
+            print("✅ Athlete medal tool registered successfully")
+        }
+        
+        guard let session = athleteSession else {
+            return AppStrings.assistantUnavailable
+        }
+        
+        guard !session.isResponding else {
+            return AppStrings.assistantBusy
+        }
+        
+        do {
+            // Use the Foundation Model with tool calling to answer the query
+            let response = try await session.respond(to: query)
+            
+            return response.content
+            
+        } catch let error as LanguageModelSession.ToolCallError {
+            print("❌ Tool call error: \(error.localizedDescription)")
+            // Access the tool name from the error
+            let toolName = error.tool.name
+            return "The athlete data tool '\(toolName)' encountered an error: \(error.underlyingError.localizedDescription). Please try again."
+        } catch {
+            print("❌ Athlete query error: \(error.localizedDescription)")
+            return "I encountered an error while looking up athlete information. Please try again."
         }
     }
     
