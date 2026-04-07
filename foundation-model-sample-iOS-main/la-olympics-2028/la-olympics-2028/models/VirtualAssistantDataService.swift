@@ -116,6 +116,13 @@ class VirtualAssistantDataService {
                 return createChatMessage(content: response)
             }
             
+            // Check if this is a country performance query
+            if queryTags.isCountryQuery {
+                print("🌍 Detected country query")
+                let response = await processCountryQuery(query: query, countryCode: queryTags.countryCode, keywords: queryTags.topics)
+                return createChatMessage(content: response)
+            }
+            
             // Otherwise, proceed with regular Olympic event query processing
             guard !queryTags.topics.isEmpty else {
                 return createChatMessage(content: AppStrings.assistantSomethingWrong)
@@ -249,6 +256,69 @@ class VirtualAssistantDataService {
         } catch {
             print("❌ Athlete query error: \(error.localizedDescription)")
             return "I encountered an error while looking up athlete information. Please try again."
+        }
+    }
+    
+    /// Processes a country performance query using the athlete medal tool
+    /// - Parameters:
+    ///   - query: The original user query
+    ///   - countryCode: The country code extracted from the query (optional)
+    ///   - keywords: Extracted keywords from the query
+    /// - Returns: Formatted response from the Foundation Model with tool calling
+    private func processCountryQuery(query: String, countryCode: String?, keywords: [String]) async -> String {
+        // Initialize athlete session if needed
+        if athleteSession == nil {
+            guard isGeneralModelAvailable else {
+                return AppStrings.assistantUnavailable
+            }
+            
+            // Create session with tool and instructions
+            athleteSession = LanguageModelSession(
+                tools: [athleteTool],
+                instructions: """
+                You are an expert Olympic swimming statistician and analyst.
+                
+                You have access to the 'getAthleteMedals' tool that retrieves Olympic medal data for swimmers.
+                
+                When users ask about country performance:
+                1. Use the tool with searchType 'country' to retrieve all athletes from that country
+                2. Provide summary statistics (total medals, breakdown by type)
+                3. Highlight top performers from that country
+                4. Be enthusiastic and engaging
+                5. Use appropriate emojis to make the response visually appealing
+                
+                Available countries with data:
+                - Australia (AUS): Kaylee McKeown, Emma McKeon
+                - United States (USA): Caeleb Dressel
+                
+                If asked about a country not in the database, politely explain you only have data for these countries' swimming athletes.
+                """
+            )
+            print("✅ Athlete medal tool registered successfully")
+        }
+        
+        guard let session = athleteSession else {
+            return AppStrings.assistantUnavailable
+        }
+        
+        guard !session.isResponding else {
+            return AppStrings.assistantBusy
+        }
+        
+        do {
+            // Use the Foundation Model with tool calling to answer the query
+            // The LLM will determine the proper country code if not provided
+            let response = try await session.respond(to: query)
+            
+            return response.content
+            
+        } catch let error as LanguageModelSession.ToolCallError {
+            print("❌ Tool call error: \(error.localizedDescription)")
+            let toolName = error.tool.name
+            return "The athlete data tool '\(toolName)' encountered an error: \(error.underlyingError.localizedDescription). Please try again."
+        } catch {
+            print("❌ Country query error: \(error.localizedDescription)")
+            return "I encountered an error while looking up country information. Please try again."
         }
     }
     

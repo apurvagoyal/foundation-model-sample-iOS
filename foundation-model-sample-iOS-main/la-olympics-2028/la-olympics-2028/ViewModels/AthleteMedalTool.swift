@@ -14,7 +14,7 @@ struct AthleteMedalTool: Tool {
     typealias Output = String
     
     var description: String {
-        "Retrieves Olympic swimming athlete medal information. Can search for specific athletes, compare countries, or find top performers. Use this for questions about swimming medals, athlete performance, and country rankings."
+        "Retrieves Olympic swimming athlete medal information. Can search for specific athletes by name, get all athletes from a country, or find top performers globally. Use this for questions about swimming medals, athlete performance, country performance, and rankings. Common country codes: AUS (Australia), USA (United States), GBR (Great Britain)."
     }
     
     // MARK: - Tool Arguments
