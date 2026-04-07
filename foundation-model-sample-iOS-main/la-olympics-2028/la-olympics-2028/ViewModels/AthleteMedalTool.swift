@@ -14,7 +14,22 @@ struct AthleteMedalTool: Tool {
     typealias Output = String
     
     var description: String {
-        "Retrieves Olympic swimming athlete medal information. Can search for specific athletes by name, get all athletes from a country, or find top performers globally. Use this for questions about swimming medals, athlete performance, country performance, and rankings. Common country codes: AUS (Australia), USA (United States), GBR (Great Britain)."
+        """
+        Retrieves Olympic swimming athlete medal information from a database of champion swimmers.
+        
+        Supports three search modes:
+        1. Search by athlete name (searchType='athlete', athleteName='name')
+        2. Search by country (searchType='country', countryCode='AUS')
+        3. Get all athletes ranked by medals (searchType='all', limit=optional)
+        
+        Use this tool for questions about:
+        - Individual athlete performance and medals
+        - Country swimming performance and rankings
+        - Comparing athletes or finding the best/top performers
+        - Medal counts (gold, silver, bronze, total)
+        
+        Available data: Australian and USA Olympic swimming champions
+        """
     }
     
     // MARK: - Tool Arguments
@@ -23,19 +38,19 @@ struct AthleteMedalTool: Tool {
     @Generable
     struct Arguments: Codable {
         /// Search query type: "athlete", "country", or "all"
-        @Guide(description: "Type of search: 'athlete' to search by athlete name, 'country' to get athletes from a specific country, or 'all' to get all athletes for comparison.")
+        @Guide(description: "Type of search to perform. Use 'athlete' to find a specific athlete by name, 'country' to get all athletes from a specific country, or 'all' to get all athletes ranked by medals (for 'who is the best' questions).")
         var searchType: String
         
         /// Name of athlete to search for (when searchType is "athlete")
-        @Guide(description: "Name of athlete to search for. Can be partial name. Only use when searchType is 'athlete'.")
+        @Guide(description: "Name of the athlete to search for. Can be a partial name like 'McKeon' or full name like 'Emma McKeon'. ONLY provide this when searchType is 'athlete'. Leave nil for 'country' or 'all' searches.")
         var athleteName: String?
         
         /// Country code to filter by (when searchType is "country")
-        @Guide(description: "Three-letter country code. REQUIRED when searchType is 'country'. Use: 'AUS' for Australia, 'USA' for United States, 'GBR' for Great Britain. Always use uppercase three-letter codes.")
+        @Guide(description: "Three-letter country code. REQUIRED when searchType is 'country'. Use: 'AUS' for Australia, 'USA' for United States, 'GBR' for Great Britain. Always use uppercase three-letter codes. Leave nil for 'athlete' or 'all' searches.")
         var countryCode: String?
         
         /// Maximum number of results to return for ranking queries
-        @Guide(description: "Maximum number of results to return. Use this when finding 'top' or 'best' athletes. Default is 10.")
+        @Guide(description: "Maximum number of results to return when using searchType 'all' or 'country'. For 'who is the best' questions, set to 1. For 'top 5 athletes', set to 5. For 'compare all athletes', set to 10 or omit (defaults to 10). Leave nil when searchType is 'athlete'.")
         var limit: Int?
     }
     
@@ -73,10 +88,7 @@ struct AthleteMedalTool: Tool {
             guard let countryCode = arguments.countryCode, !countryCode.isEmpty else {
                 return "Error: countryCode is required when searchType is 'country'."
             }
-            
-            // Normalize country code (handle both codes and full names)
-            let normalizedCode = normalizeCountryCode(countryCode)
-            foundAthletes = dataService.findAthletes(byCountry: normalizedCode)
+            foundAthletes = dataService.findAthletes(byCountry: countryCode)
             
         case "all":
             // Get all athletes for comparison
@@ -214,42 +226,6 @@ struct AthleteMedalTool: Tool {
         case "silver": return "🥈"
         case "bronze": return "🥉"
         default: return "🏅"
-        }
-    }
-    
-    /// Normalizes country input to standard three-letter codes
-    /// - Parameter input: Country name or code from the LLM
-    /// - Returns: Normalized three-letter country code
-    private func normalizeCountryCode(_ input: String) -> String {
-        let lowercased = input.lowercased().trimmingCharacters(in: .whitespaces)
-        
-        // Map common country names and variations to codes
-        switch lowercased {
-        case "australia", "aus", "aussie", "oz":
-            return "AUS"
-        case "united states", "usa", "us", "america", "american", "united states of america":
-            return "USA"
-        case "great britain", "gbr", "uk", "britain", "british", "united kingdom", "england":
-            return "GBR"
-        case "china", "chn", "chinese":
-            return "CHN"
-        case "japan", "jpn", "japanese":
-            return "JPN"
-        case "canada", "can", "canadian":
-            return "CAN"
-        case "france", "fra", "french":
-            return "FRA"
-        case "germany", "ger", "german":
-            return "GER"
-        case "italy", "ita", "italian":
-            return "ITA"
-        default:
-            // If already a three-letter code, return uppercase
-            if input.count == 3 {
-                return input.uppercased()
-            }
-            // Otherwise return as-is (uppercase)
-            return input.uppercased()
         }
     }
 }
