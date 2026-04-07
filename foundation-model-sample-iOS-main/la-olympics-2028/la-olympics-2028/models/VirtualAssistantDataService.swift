@@ -111,6 +111,12 @@ class VirtualAssistantDataService {
         do {
             // Extract content tags from the query
             let queryTags = try await extractContentTags(from: query)
+            print("📋 Content tags extracted:")
+            print("   - Topics: \(queryTags.topics)")
+            print("   - Gender: \(queryTags.gender)")
+            print("   - isAthleteComparison: \(queryTags.isAthleteComparison)")
+            print("   - isCountryQuery: \(queryTags.isCountryQuery)")
+            print("   - countryCode: \(queryTags.countryCode ?? "nil")")
             
             // Check if this is an athlete comparison query
             if queryTags.isAthleteComparison {
@@ -269,6 +275,10 @@ class VirtualAssistantDataService {
     ///   - keywords: Extracted keywords from the query
     /// - Returns: Formatted response from the Foundation Model with tool calling
     private func processCountryQuery(query: String, countryCode: String?, keywords: [String]) async -> String {
+        print("🌍 Processing country query: '\(query)'")
+        print("   - Extracted country code: \(countryCode ?? "nil")")
+        print("   - Keywords: \(keywords)")
+        
         // Initialize dedicated country session if needed
         if countrySession == nil {
             guard isGeneralModelAvailable else {
@@ -281,40 +291,42 @@ class VirtualAssistantDataService {
                 instructions: """
                 You are an expert Olympic swimming statistician specializing in country performance analysis.
                 
-                You have access to the 'getAthleteMedals' tool that retrieves Olympic medal data for swimmers.
+                You have access to the 'AthleteMedalTool' that retrieves Olympic medal data for swimmers.
                 
-                When users ask about a country's swimming performance:
-                1. **Always use searchType 'country'** with the appropriate country code
-                2. Provide comprehensive country statistics:
-                   - Total medal count by type (gold, silver, bronze)
-                   - Overall ranking/standing
-                   - Top performing athletes from that country
-                3. Add context and insights:
-                   - Highlight standout performances
-                   - Compare medal distribution (relay vs individual)
-                   - Note any dominant athletes or events
-                4. Be enthusiastic and patriotic (but balanced)
-                5. Use emojis and formatting for visual appeal
+                **CRITICAL: How to Use the Tool for Country Queries**
+                When users ask about a country's swimming performance, ALWAYS:
+                1. Use searchType: "country"
+                2. Provide the correct countryCode based on this mapping:
+                   - "Australia", "AUS", "Aus", "aussie" → countryCode: "AUS"
+                   - "United States", "USA", "US", "America", "American" → countryCode: "USA"
+                   - "Great Britain", "GBR", "UK", "Britain", "British" → countryCode: "GBR"
                 
-                **Country Code Reference:**
-                - Australia → AUS
-                - United States → USA
-                - Great Britain → GBR
-                - China → CHN
-                - Japan → JPN
+                **Tool Call Example:**
+                For "How did Australia do in swimming?", call the tool with:
+                {
+                  "searchType": "country",
+                  "countryCode": "AUS"
+                }
+                
+                **Response Requirements:**
+                After getting the tool data, provide:
+                1. **Country Overview** - Total medals (🥇🥈🥉) with counts
+                2. **Top Athletes** - List athletes ranked by medal count
+                3. **Notable Achievements** - Highlight standout performances
+                4. **Context** - Compare to other nations if relevant
                 
                 **Available Data:**
-                Current database includes swimmers from:
                 - Australia (AUS): Kaylee McKeown, Emma McKeon
                 - United States (USA): Caeleb Dressel
                 
-                **Important:** If asked about a country not in the database, politely explain that you only have swimming data for Australia and the United States, and offer to provide information about those countries instead.
+                **If country not found:** Politely explain you only have data for Australia and USA, and offer to show information about those countries instead.
                 
                 **Response Style:**
-                - Start with an engaging headline
-                - Use structured formatting (sections, bullet points)
-                - Include relevant emojis (🏊, 🥇, 🥈, 🥉, 🇦🇺, 🇺🇸, etc.)
-                - End with a notable achievement or interesting fact
+                - Use flag emojis (🇦🇺 for Australia, 🇺🇸 for USA)
+                - Use medal emojis (🥇🥈🥉)
+                - Use swimming emoji (🏊‍♀️🏊‍♂️)
+                - Be enthusiastic and engaging
+                - Structure with clear sections and formatting
                 """
             )
             print("✅ Country performance session created successfully")

@@ -31,7 +31,7 @@ struct AthleteMedalTool: Tool {
         var athleteName: String?
         
         /// Country code to filter by (when searchType is "country")
-        @Guide(description: "Three-letter country code (e.g., 'AUS', 'USA'). Only use when searchType is 'country'.")
+        @Guide(description: "Three-letter country code. REQUIRED when searchType is 'country'. Use: 'AUS' for Australia, 'USA' for United States, 'GBR' for Great Britain. Always use uppercase three-letter codes.")
         var countryCode: String?
         
         /// Maximum number of results to return for ranking queries
@@ -73,7 +73,10 @@ struct AthleteMedalTool: Tool {
             guard let countryCode = arguments.countryCode, !countryCode.isEmpty else {
                 return "Error: countryCode is required when searchType is 'country'."
             }
-            foundAthletes = dataService.findAthletes(byCountry: countryCode)
+            
+            // Normalize country code (handle both codes and full names)
+            let normalizedCode = normalizeCountryCode(countryCode)
+            foundAthletes = dataService.findAthletes(byCountry: normalizedCode)
             
         case "all":
             // Get all athletes for comparison
@@ -211,6 +214,42 @@ struct AthleteMedalTool: Tool {
         case "silver": return "🥈"
         case "bronze": return "🥉"
         default: return "🏅"
+        }
+    }
+    
+    /// Normalizes country input to standard three-letter codes
+    /// - Parameter input: Country name or code from the LLM
+    /// - Returns: Normalized three-letter country code
+    private func normalizeCountryCode(_ input: String) -> String {
+        let lowercased = input.lowercased().trimmingCharacters(in: .whitespaces)
+        
+        // Map common country names and variations to codes
+        switch lowercased {
+        case "australia", "aus", "aussie", "oz":
+            return "AUS"
+        case "united states", "usa", "us", "america", "american", "united states of america":
+            return "USA"
+        case "great britain", "gbr", "uk", "britain", "british", "united kingdom", "england":
+            return "GBR"
+        case "china", "chn", "chinese":
+            return "CHN"
+        case "japan", "jpn", "japanese":
+            return "JPN"
+        case "canada", "can", "canadian":
+            return "CAN"
+        case "france", "fra", "french":
+            return "FRA"
+        case "germany", "ger", "german":
+            return "GER"
+        case "italy", "ita", "italian":
+            return "ITA"
+        default:
+            // If already a three-letter code, return uppercase
+            if input.count == 3 {
+                return input.uppercased()
+            }
+            // Otherwise return as-is (uppercase)
+            return input.uppercased()
         }
     }
 }

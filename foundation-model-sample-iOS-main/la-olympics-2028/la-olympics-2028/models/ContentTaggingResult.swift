@@ -27,12 +27,12 @@ struct ContentTaggingResult {
     let isAthleteComparison: Bool
     
     @Guide(
-        description: "Set to true if the query is asking about a country's performance in swimming. Examples: 'how did Australia do', 'USA swimming results', 'Australia medals in swimming', 'what did Australia win'. Extract the country name or code if present."
+        description: "Set to true if the query is asking about a country's performance in swimming. Examples: 'how did Australia do', 'USA swimming results', 'Australia medals in swimming', 'what did Australia win', 'Australia's performance'. Look for country names like Australia, USA, United States, America, Britain, etc."
     )
     let isCountryQuery: Bool
     
     @Guide(
-        description: "The country name or code if the query is about a specific country's performance. Common codes: AUS (Australia), USA (United States), GBR (Great Britain). Leave empty if not a country query."
+        description: "Extract the country mentioned in the query. Return either the full country name (e.g., 'Australia', 'United States') OR the three-letter code (e.g., 'AUS', 'USA'). If the query mentions 'Australia' or 'AUS', return 'Australia'. If the query mentions 'USA', 'United States', or 'America', return 'United States'. Only populate this when isCountryQuery is true."
     )
     let countryCode: String?
 }
