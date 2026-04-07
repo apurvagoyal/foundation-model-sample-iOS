@@ -38,6 +38,9 @@ class VirtualAssistantDataService {
     /// Session for athlete comparison with tool calling
     private var athleteSession: LanguageModelSession?
     
+    /// Session for country performance queries with tool calling
+    private var countrySession: LanguageModelSession?
+    
     /// Athlete medal tool for querying athlete data
     private let athleteTool: AthleteMedalTool
     
@@ -266,38 +269,58 @@ class VirtualAssistantDataService {
     ///   - keywords: Extracted keywords from the query
     /// - Returns: Formatted response from the Foundation Model with tool calling
     private func processCountryQuery(query: String, countryCode: String?, keywords: [String]) async -> String {
-        // Initialize athlete session if needed
-        if athleteSession == nil {
+        // Initialize dedicated country session if needed
+        if countrySession == nil {
             guard isGeneralModelAvailable else {
                 return AppStrings.assistantUnavailable
             }
             
-            // Create session with tool and instructions
-            athleteSession = LanguageModelSession(
+            // Create a specialized session for country queries
+            countrySession = LanguageModelSession(
                 tools: [athleteTool],
                 instructions: """
-                You are an expert Olympic swimming statistician and analyst.
+                You are an expert Olympic swimming statistician specializing in country performance analysis.
                 
                 You have access to the 'getAthleteMedals' tool that retrieves Olympic medal data for swimmers.
                 
-                When users ask about country performance:
-                1. Use the tool with searchType 'country' to retrieve all athletes from that country
-                2. Provide summary statistics (total medals, breakdown by type)
-                3. Highlight top performers from that country
-                4. Be enthusiastic and engaging
-                5. Use appropriate emojis to make the response visually appealing
+                When users ask about a country's swimming performance:
+                1. **Always use searchType 'country'** with the appropriate country code
+                2. Provide comprehensive country statistics:
+                   - Total medal count by type (gold, silver, bronze)
+                   - Overall ranking/standing
+                   - Top performing athletes from that country
+                3. Add context and insights:
+                   - Highlight standout performances
+                   - Compare medal distribution (relay vs individual)
+                   - Note any dominant athletes or events
+                4. Be enthusiastic and patriotic (but balanced)
+                5. Use emojis and formatting for visual appeal
                 
-                Available countries with data:
+                **Country Code Reference:**
+                - Australia → AUS
+                - United States → USA
+                - Great Britain → GBR
+                - China → CHN
+                - Japan → JPN
+                
+                **Available Data:**
+                Current database includes swimmers from:
                 - Australia (AUS): Kaylee McKeown, Emma McKeon
                 - United States (USA): Caeleb Dressel
                 
-                If asked about a country not in the database, politely explain you only have data for these countries' swimming athletes.
+                **Important:** If asked about a country not in the database, politely explain that you only have swimming data for Australia and the United States, and offer to provide information about those countries instead.
+                
+                **Response Style:**
+                - Start with an engaging headline
+                - Use structured formatting (sections, bullet points)
+                - Include relevant emojis (🏊, 🥇, 🥈, 🥉, 🇦🇺, 🇺🇸, etc.)
+                - End with a notable achievement or interesting fact
                 """
             )
-            print("✅ Athlete medal tool registered successfully")
+            print("✅ Country performance session created successfully")
         }
         
-        guard let session = athleteSession else {
+        guard let session = countrySession else {
             return AppStrings.assistantUnavailable
         }
         
@@ -307,7 +330,7 @@ class VirtualAssistantDataService {
         
         do {
             // Use the Foundation Model with tool calling to answer the query
-            // The LLM will determine the proper country code if not provided
+            // The LLM will determine the proper country code and call the tool
             let response = try await session.respond(to: query)
             
             return response.content
